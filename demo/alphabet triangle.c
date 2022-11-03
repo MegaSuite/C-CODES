@@ -18,6 +18,8 @@ int main(void)
                 printf("%c ",a);
         printf("\n");  
         }
+
+        
     }
     else{
         COUNT = a-'a'+1; 
