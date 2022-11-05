@@ -12,7 +12,7 @@ int main()
 }
 
 
-//若使用double（双精度浮点数）则应如下表述：
+//若使用double（双精度浮点数）则应如下表
 /*int main()
 {
     int i,n;
