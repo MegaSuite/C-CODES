@@ -13,6 +13,11 @@ int main()
     printf("二进制 --> %s\n", s);
     itoa(a, s, 3);
     printf("三进制 --> %s\n", s);
+
+
+
+
+    
     return 0;
 }
 
