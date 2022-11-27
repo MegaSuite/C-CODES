@@ -1,26 +1,27 @@
-#include<stdio.h>
+#include <stdio.h>
+void menu()
+{
+    printf("Please choose one of the following:\n"
+    "1)copy files\n2)move files\n3)remove files\n4)quit\n"
+    "Enter the number of your choice:\n");
+}
+int main_body(int a,int b)
+{
+    int c=0;
+    int flag;
+    flag=scanf("%d",&c);
+    if (flag==1&&c<=a&&c>=b) printf("%d",c);
+    else if(flag==0) printf("%d",4);
+    else
+    {
+        menu();
+        main_body(a,b);
+    }
+}
 int main()
 {
-char ch1[100]={0};
-char ch2[100]={0};
-int i=0,c=0;
-int j=0;
-while((ch1[i]=getchar())!='\n') i++;
-while((ch2[j]=getchar())!='\n') j++;
-for(c=0;c<100;c++)
-{
-    if(ch1[c]=='\n')
-    {
-        for (int x=0;x<100;x++)
-        {
-            if(ch2[x]=='\n') break;
-            ch1[c]=ch2[x];
-            c++;
-        }
-        break;
-    }
-    continue;
-}
-printf("%s",ch1);
-return 0;
+    menu();
+    int a=44,b=3;
+    main_body(a,b);
+    return 0;
 }
