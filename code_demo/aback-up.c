@@ -1,29 +1,73 @@
 #include<stdio.h>
-void FMax(int a[],int n,int* max,int* min);
-int main()
-{
-	int a[5],n=0;
-	for(n=0;n<5;n++)
-	{
-		scanf_s("%d",&a[n]);
-	}
-	int big=a[0],small=a[0];
-	FMax(a,n,&big,&small);
-	printf("Max:%d\n",big);
-	printf("Min:%d\n",small);
-	return 0;
-	
-	
+#include<stdlib.h>
+#define MaxSize 199
+ 
+struct SNode {
+	int Data[MaxSize];
+	int Top;
+};
+typedef struct SNode* Stack;
+ 
+Stack CreateStack() {
+	Stack p;
+	p = (Stack)malloc(sizeof(struct SNode));
+	p->Top = -1;
+	return p;
 }
-void FMax(int a[],int n,int* max,int* min)
-{
-	for (int i=0;i < n; i++)
-	{
-		if (*max<a[i]) 
-			// *max=a[i];
-			*max=*(a+i);
-		else if (*min>a[i]) 
-			// *min=a[i];
-			*min=*(a+i);
+ 
+void Push(Stack S, int x) {
+	if (S->Top == MaxSize) {
+		printf("Stack Full\n");
+	}
+	else {
+		S->Data[++S->Top] = x;
 	}
 }
+ 
+int Pop(Stack S) {
+	if (S->Top == -1) {
+		printf("Stack is Empty!\n");
+	}
+	else {
+		int t;
+		t = S->Data[S->Top];
+		S->Top--;
+		return t;
+	}
+}
+ 
+int main() {
+	Stack S;
+	S = CreateStack();
+	char ch;
+	ch = getchar();
+	int a, b, an, t;
+ 
+	while (ch != EOF) {
+		if (ch >= '0' && ch <= '9') {
+			Push(S, ch - '0');
+			ch = getchar();
+			while (ch >= '0' && ch <= '9') {
+				t = Pop(S);
+				Push(S, t * 10 + ch - '0');
+				ch = getchar();
+			}
+		}
+		else if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+			a = Pop(S);
+			b = Pop(S);
+			switch (ch) {
+			case '+':an = b + a; break;
+			case '-':an = b - a; break;
+			case '*':an = b * a; break;
+			case '/':an = b / a; break;
+			}
+			Push(S, an);
+		}
+		else if (ch == '\n') {
+			break;
+		}
+		ch = getchar();
+	}
+	printf("%d", Pop(S));
+} 
